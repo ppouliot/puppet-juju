@@ -46,6 +46,7 @@ class juju (
   $prerequired_packages       = $juju::params::prerequired_packages,
   $juju_release               = $juju::params::juju_release,
   $juju_packages              = $juju::params::juju_packages,
+  $package_name               = $juju::params::package_name,
   $manage_package             = $juju::params::manage_package,
 
 ) inherits juju::params {

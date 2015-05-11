@@ -31,6 +31,7 @@ class juju::params {
           $prerequired_packages          = undef
           $manage_package                = true
           $juju_release                  = 'stable'
+          $package_name                  = 'juju'
         }
         default:{
           warning("This is currently untested on your ${operatingsystemrelease}")

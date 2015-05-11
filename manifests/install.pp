@@ -10,7 +10,6 @@ class juju::install {
   validate_re($::operatingsystemrelease, '(^12.04|14.04)$', 'This Module only works on Ubuntu releases 12.04 and 14.04.')
   notice("JUJU installation is occuring on node ${::fqdn}." )
 
-
   case $operatingsystem {
     'Ubuntu':{
       if ($juju::juju_release) {
