@@ -13,10 +13,9 @@ class juju::install {
 
   case $operatingsystem {
     'Ubuntu':{
-
       if ($juju::juju_release) {
         include apt
-        notice("Node ${::fqdn} is using the juju-maintainers ${juju::juju_maintiners_release} package repository for JUJU installation." )
+        notice("Node ${::fqdn} is using the juju ${juju::juju_release} package repository for JUJU installation." )
         apt::ppa{"ppa:juju/${juju::juju_release}":}
         if ($juju::manage_package) {
           Apt::Ppa["ppa:juju/${juju::juju_release}"] -> Package['juju']
