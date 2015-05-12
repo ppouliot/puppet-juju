@@ -17,7 +17,10 @@ define juju::user {
 
   file {["/home/${name}/.juju",
          "/home/${name}/.juju/ssh",
-    ensure => directory,
+         "/home/${name}/.juju/ssh",
+         "/home/${name}/.juju/ssh/juju_id_rsa",
+         "/home/${name}/.juju/ssh/juju_id_rsa.pub"]:
+   ensure => present,
   }
 
 }

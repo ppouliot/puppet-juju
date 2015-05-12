@@ -11,6 +11,8 @@ define juju::generic_config (){
     cwd     => $basedir,
     creates => ["${basedir}/.juju/",
                 "${basedir}/.juju/environments.yaml",
-                "${basedir}/.juju/ssh"],
+                "${basedir}/.juju/ssh",
+                "${basedir}/.juju/ssh/juju_id_rsa",
+                "${basedir}/.juju/ssh/juju_id_rsa.pub"],
   }
 }
