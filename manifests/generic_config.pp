@@ -1,9 +1,9 @@
 # == Define: juju::generic_config
 #
-define juju::generic_config ($name){
-  case $name {
-    'root':{ $basedir = "/${name}/" }
-    default:{ $basedir = "/home/${name}/" }
+define juju::generic_config ($juju_username){
+  case $juju_username {
+    'root':{ $basedir = "/${juju_username}/" }
+    default:{ $basedir = "/home/${juju_username}/" }
   }
   exec {'juju_generate_generic_config':
     command => '/usr/bin/juju generate-config',
