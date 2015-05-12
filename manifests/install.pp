@@ -37,6 +37,9 @@ class juju::install {
         package { 'juju':
           ensure => $juju::ensure,
           name   => $jujupackage
+        } ->
+        package{'charm-tools':
+          ensure => $juju::ensure,
         }
       }
     }

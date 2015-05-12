@@ -26,6 +26,9 @@
 # [*juju_packages*]
 #   Default MAAS Packages to install 
 #
+# [*juju_packages*]
+#   Default MAAS Packages to install 
+#
 # === Examples
 #
 #  class { 'juju':
