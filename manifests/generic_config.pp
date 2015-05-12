@@ -10,7 +10,7 @@ define juju::generic_config (){
     user    => $name,
     cwd     => "${basedir}/${name}",
     creates => ['${basedir}/${name}/.juju/',
-                '${basedir}/${name}/.juju/environments.yaml'
+                '${basedir}/${name}/.juju/environments.yaml',
                 '${basedir}/${name}/.juju/ssh'],
   }
 }
