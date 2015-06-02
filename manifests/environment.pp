@@ -72,6 +72,13 @@ define juju::environment(){
     'maas':{
     }
     'local':{
+      $environment_type            = 'local'
+      $root_dir                    = '~/.juju/local'
+      $storage_port                = '8040'
+      $network_bridge              = 'lxcbr0'
+      $default_series              = 'trusty'
+      $enable_os_refresh_update    = true
+      $enable_os_upgrade           = true
     }
     'joyent':{
     }
@@ -97,7 +104,8 @@ define juju::environment(){
       $enable_os_refresh_update    = true
       $enable_os_upgrade           = true
     }
-  default:{
-    fail("${name} is not a valid juju environment!")
-  } 
+    default:{
+      fail("${name} is not a valid juju environment!")
+    } 
+  }
 }
