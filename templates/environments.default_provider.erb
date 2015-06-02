@@ -1,0 +1,56 @@
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !!!! This file is managed by the juju puppet module !!!!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+# This is the Juju config file, which you can use to specify multiple
+# environments in which to deploy. By default Juju ships with AWS
+# (default), HP Cloud, OpenStack, Azure, MaaS, Local and Manual
+# providers. See https://juju.ubuntu.com/docs for more information
+
+# An environment configuration must always specify at least the
+# following information:
+# - name (to identify the environment)
+# - type (to specify the provider)
+# In the following example the name is "myenv" and type is "ec2".
+# myenv:
+#    type: ec2
+
+# Values in <brackets> below need to be filled in by the user.
+# Optional attributes are shown commented out, with
+# a sample value or a value in <brackets>.
+
+# There are several settings supported by all environments, all of which
+# are optional and have specified default values. For more info, see the
+# Juju documentation.
+
+# The default environment is chosen when an environment is not
+# specified using any of the following, in descending order of precedence:
+#  1. -e or --environment command line parameter, passed after the command, e.g.
+#     $ juju add-unit -e myenv myservice
+#  2. By setting JUJU_ENV environment variable.
+#  3. Using the juju switch command like this:
+#     $ juju switch myenv
+#
+
+# You can control how Juju harvests machines by using the
+# provisioner-harvest-mode setting. Harvesting is a process wherein
+# Juju attempts to reclaim unused machines.
+#
+# Options are:
+#
+# Don't harvest any machines.
+# provisioner-harvest-mode: none
+#
+# Only harvest machines that Juju knows about and are dead.
+# provisioner-harvest-mode: destroyed
+#
+# Only harvest machines that Juju doesn't know about.
+# provisioner-harvest-mode: unknown
+#
+# Harvest both dead and unknown machines.
+# provisioner-harvest-mode: all
+
+default: <%= @default_provider %>
+
+environments:
+    # https://juju.ubuntu.com/docs/config-openstack.html
