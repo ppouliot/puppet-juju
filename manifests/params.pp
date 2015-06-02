@@ -32,6 +32,7 @@ class juju::params {
           $manage_package                = true
           $juju_release                  = 'stable'
           $package_name                  = 'juju'
+          $default_provider              = 'amazon'
         }
         default:{
           warning("This is currently untested on your ${operatingsystemrelease}")

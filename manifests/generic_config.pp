@@ -1,4 +1,4 @@
-# == Define: juju::generic_config
+ == Define: juju::generic_config
 #
 define juju::generic_config (){
   case $name {
@@ -14,5 +14,6 @@ define juju::generic_config (){
                 "${basedir}/.juju/ssh",
                 "${basedir}/.juju/ssh/juju_id_rsa",
                 "${basedir}/.juju/ssh/juju_id_rsa.pub"],
+    onlyif    => "/usr/bin/test ! -f ${basedir}/.juju",
   }
 }
