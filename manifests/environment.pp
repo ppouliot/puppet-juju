@@ -1,6 +1,6 @@
 # == Class: juju::environment
 #
-define juju::environment(){
+define juju::environment($juju_path){
   validate_re($name, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
   case $name {
     'amazon':{
@@ -85,7 +85,7 @@ define juju::environment(){
       $enable_os_upgrade           = true
     }
     'maas':{
-      $environment_type            = 'manual'
+      $environment_type            = 'maas'
       $maas_server                 = undef
       $maas_oauth                  = undef 
       $bootstrap_timeout           = '1800'
@@ -138,5 +138,22 @@ define juju::environment(){
     default:{
       fail("${name} is not a valid juju environment!")
     } 
+  }
+  if ! defined (Concat["${juju_path}/environment.yaml"]) {
+    concat { "${juju_path}/.juju/environment.yaml":
+      mode    => 0644,
+    }
+  }
+  if ! defined (Concat::Fragment["${$juju_path}.environtment.yaml_header"]) {
+    concat::fragment {"${$juju_path}.environtment.yaml_header":
+      target  => "${juju_path}/.juju/environment.yaml",
+      content => template("juju/environment.header.erb")
+      order   => 01,
+    }
+  }
+  concat::fragment {"${$juju_path}.juju.environtment.yaml.${name}":
+    target  => "${juju_path}/environment.yaml",
+    content => template("juju/environment.${name}.erb")
+    order   => 02,
   }
 }
