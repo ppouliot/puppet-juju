@@ -23,4 +23,16 @@ define juju::user {
    ensure => present,
   }
 
+  if ! defined (Concat["/home/${name}/environment.yaml"]) {
+    concat { "/home/${name}/.juju/environment.yaml":
+      mode    => 0644,
+    }
+  }
+  if ! defined (Concat::Fragment["{$name}.juju.environtment.yaml_header"]) {
+    concat::fragment {"${name}.juju.environtment.yaml_header":
+      target  => "/home/${name}/.juju/environment.yaml",
+      content => template("juju/environment.header.erb")
+      order   => 01,
+    }
+  }
 }
