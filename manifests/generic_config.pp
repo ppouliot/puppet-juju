@@ -1,4 +1,4 @@
- == Define: juju::generic_config
+# == Define: juju::generic_config
 #
 define juju::generic_config (){
   case $name {
