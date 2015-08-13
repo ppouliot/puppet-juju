@@ -15,7 +15,7 @@ class juju::default_user {
 
   juju::generic_config{'juju':} ->
   file{["/home/juju/.juju",
-         "/home/juju/.juju/ssh",
+         "/home/juju/.juju/ssh",]:
     ensure => directory,
   } ->
   file{[ "/home/juju/.juju/ssh/juju_id_rsa",
