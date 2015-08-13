@@ -32,7 +32,7 @@ class juju::default_user {
   if ! defined (Concat::Fragment["{$name}.juju.environtment.yaml_header"]) {
     concat::fragment {"'juju'.juju.environtment.yaml_header":
       target  => "/home/'juju'/.juju/environment.yaml",
-      content => template("juju/environment.header.erb")
+      content => template("juju/environment.header.erb"),
       order   => 01,
     }
   }
