@@ -4,13 +4,11 @@ class juju::default_user {
   user { 'juju':
     ensure           => 'present',
     comment          => 'juju',
-    gid              => '0',
     home             => '/home/juju',
     password         => $juju::juju_password,
     password_max_age => '99999',
     password_min_age => '0',
     shell            => '/bin/bash',
-    uid              => '0',
   }
 
   juju::generic_config{'juju':} ->
