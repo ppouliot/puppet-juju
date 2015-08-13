@@ -24,16 +24,12 @@ class juju::default_user {
   }
 
 
-  if ! defined (Concat["/home/juju/environment.yaml"]) {
-    concat { "/home/juju/.juju/environment.yaml":
-      mode    => 0644,
-    }
+  concat { "/home/juju/.juju/environment.yaml":
+    mode    => 0644,
   }
-  if ! defined (Concat::Fragment["{$name}.juju.environtment.yaml_header"]) {
-    concat::fragment {"'juju'.juju.environtment.yaml_header":
-      target  => "/home/'juju'/.juju/environment.yaml",
-      content => template("juju/environments.header.erb"),
-      order   => 01,
-    }
+  concat::fragment {"'juju'.juju.environtment.yaml_header":
+    target  => "/home/'juju'/.juju/environment.yaml",
+    content => template("juju/environments.header.erb"),
+    order   => 01,
   }
 }
