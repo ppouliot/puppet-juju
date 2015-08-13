@@ -3,7 +3,8 @@
 class juju::default_user {
   user { 'juju':
     ensure           => 'present',
-    comment          => 'juju',
+    comment          => 'juju: Master of jiu jitsu',
+    gid              => 'juju',
     home             => '/home/juju',
     password         => $juju::juju_password,
     password_max_age => '99999',
