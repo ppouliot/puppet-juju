@@ -27,8 +27,8 @@ class juju::default_user {
   concat { "/home/juju/.juju/environment.yaml":
     mode    => 0644,
   }
-  concat::fragment {"'juju'.juju.environtment.yaml_header":
-    target  => "/home/'juju'/.juju/environment.yaml",
+  concat::fragment {"juju.environtment.yaml_header":
+    target  => "/home/juju/.juju/environment.yaml",
     content => template("juju/environments.header.erb"),
     order   => 01,
   }
