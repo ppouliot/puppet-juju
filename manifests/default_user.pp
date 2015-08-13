@@ -1,6 +1,10 @@
 # == Define: juju::default_user
 #
 class juju::default_user {
+
+  group {'juju':
+    ensure           => 'present',
+  } ->
   user { 'juju':
     ensure           => 'present',
     comment          => 'juju',
@@ -10,7 +14,7 @@ class juju::default_user {
     password_max_age => '99999',
     password_min_age => '0',
     shell            => '/bin/bash',
-  }
+  } ->
 
   juju::generic_config{'juju':} ->
   file{["/home/juju/.juju",
