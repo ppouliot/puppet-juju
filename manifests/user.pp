@@ -14,14 +14,15 @@ class juju::user {
   } ->
 
   juju::generic_config{'juju'} ->
-
-  file {["/home/juju/.juju",
+  file{["/home/juju/.juju",
          "/home/juju/.juju/ssh",
-         "/home/juju/.juju/ssh",
-         "/home/juju/.juju/ssh/juju_id_rsa",
+    ensure => directory,
+  } ->
+  file{[ "/home/juju/.juju/ssh/juju_id_rsa",
          "/home/juju/.juju/ssh/juju_id_rsa.pub"]:
-    ensure => present,
+    ensure => file,
   }
+
 
   if ! defined (Concat["/home/juju/environment.yaml"]) {
     concat { "/home/juju/.juju/environment.yaml":
