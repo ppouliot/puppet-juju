@@ -15,7 +15,7 @@
 # === Variables
 #
 # [*version*]
-#   Specify a version of MAAS to install
+#   Specify a version of Juju to install
 #
 # [*ensure*]
 #   Valid options are 'present' or 'absent'
@@ -24,10 +24,14 @@
 #   Release to use for juju packages
 #
 # [*juju_packages*]
-#   Default MAAS Packages to install 
+#   Default Juju Packages to install 
 #
 # [*juju_packages*]
-#   Default MAAS Packages to install 
+#   Default Juju Packages to install 
+#
+# [*juju_password*]
+#   Password for the system user account named 'juju' which is the 
+#   account use this modules uses for charm bootstraping
 #
 # === Examples
 #
@@ -49,6 +53,7 @@ class juju (
   $prerequired_packages       = $juju::params::prerequired_packages,
   $juju_release               = $juju::params::juju_release,
   $juju_packages              = $juju::params::juju_packages,
+  $juju_password              = $juju::params::juju_password,
   $package_name               = $juju::params::package_name,
   $manage_package             = $juju::params::manage_package,
 
@@ -57,15 +62,17 @@ class juju (
   validate_string($version)
   validate_re($::operatingsystem, '(^Ubuntu)$', 'This Module only works on Ubuntu based systems.')
   validate_re($::operatingsystemrelease, '(^12.04|14.04)$', 'This Module only works on Ubuntu releases 12.04 and 14.04.')
-  notice("MAAS on node ${::fqdn} is managed by the juju puppet module." )
+  notice("Juju on node ${::fqdn} is managed by the juju puppet module." )
 
   if ($juju_release) {
     validate_string($juju_release, '^(stable)$', 'This module only supports the Stable Releases')
   }
 
   class{'juju::install':} -> 
+  class{'juju::user':}    ->
   class{'juju::config':}
 
   contain 'juju::install'
+  contain 'juju::user'
   contain 'juju::config'
 }

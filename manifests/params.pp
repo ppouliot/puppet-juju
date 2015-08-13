@@ -1,18 +1,5 @@
 # == Class: juju::params
 #
-#
-# === Parameters
-#
-# === Variables
-#
-# [*juju_release*]
-#   Release to use for juju packages
-#   Valid options are 'stable'.
-#
-# [*juju_packages*]
-#   Default JUJU Packages to install
-#
-#
 # === Authors
 #
 # Peter J. Pouliot <peter@pouliot.net>
@@ -30,6 +17,7 @@ class juju::params {
           $ensure                        = present 
           $prerequired_packages          = undef
           $manage_package                = true
+          $juju_password                 = 'juju'
           $juju_release                  = 'stable'
           $package_name                  = 'juju'
           $default_provider              = 'amazon'

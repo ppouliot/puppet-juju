@@ -1,36 +1,36 @@
 # == Define: juju::user
 #
-define juju::user {
-  user { '${name}':
+class juju::user {
+  user { 'juju':
     ensure           => 'present',
-    comment          => '${name}',
+    comment          => 'juju',
     gid              => '0',
-    home             => '/home/${name}',
-    password         => '${name}',
+    home             => '/home/juju',
+    password         => "${juju::juju_password}",
     password_max_age => '99999',
     password_min_age => '0',
     shell            => '/bin/bash',
     uid              => '0',
   } ->
 
-  juju::generic_config{$name:} ->
+  juju::generic_config{'juju'} ->
 
-  file {["/home/${name}/.juju",
-         "/home/${name}/.juju/ssh",
-         "/home/${name}/.juju/ssh",
-         "/home/${name}/.juju/ssh/juju_id_rsa",
-         "/home/${name}/.juju/ssh/juju_id_rsa.pub"]:
-   ensure => present,
+  file {["/home/juju/.juju",
+         "/home/juju/.juju/ssh",
+         "/home/juju/.juju/ssh",
+         "/home/juju/.juju/ssh/juju_id_rsa",
+         "/home/juju/.juju/ssh/juju_id_rsa.pub"]:
+    ensure => present,
   }
 
-  if ! defined (Concat["/home/${name}/environment.yaml"]) {
-    concat { "/home/${name}/.juju/environment.yaml":
+  if ! defined (Concat["/home/juju/environment.yaml"]) {
+    concat { "/home/juju/.juju/environment.yaml":
       mode    => 0644,
     }
   }
   if ! defined (Concat::Fragment["{$name}.juju.environtment.yaml_header"]) {
-    concat::fragment {"${name}.juju.environtment.yaml_header":
-      target  => "/home/${name}/.juju/environment.yaml",
+    concat::fragment {"'juju'.juju.environtment.yaml_header":
+      target  => "/home/'juju'/.juju/environment.yaml",
       content => template("juju/environment.header.erb")
       order   => 01,
     }
