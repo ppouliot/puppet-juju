@@ -1,6 +1,6 @@
-# == Define: juju::user
+# == Define: juju::default_user
 #
-class juju::user {
+class juju::default_user {
   user { 'juju':
     ensure           => 'present',
     comment          => 'juju',
@@ -11,7 +11,7 @@ class juju::user {
     password_min_age => '0',
     shell            => '/bin/bash',
     uid              => '0',
-  } ->
+  }
 
   juju::generic_config{'juju'} ->
   file{["/home/juju/.juju",
