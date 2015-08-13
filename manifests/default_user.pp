@@ -3,7 +3,7 @@
 class juju::default_user {
   user { 'juju':
     ensure           => 'present',
-    comment          => 'juju: Master of jiu jitsu',
+    comment          => 'juju',
     gid              => 'juju',
     home             => '/home/juju',
     password         => $juju::juju_password,
