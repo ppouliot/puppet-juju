@@ -6,14 +6,14 @@ class juju::default_user {
     comment          => 'juju',
     gid              => '0',
     home             => '/home/juju',
-    password         => "${juju::juju_password}",
+    password         => $juju::juju_password,
     password_max_age => '99999',
     password_min_age => '0',
     shell            => '/bin/bash',
     uid              => '0',
   }
 
-  juju::generic_config{'juju'} ->
+  juju::generic_config{'juju':} ->
   file{["/home/juju/.juju",
          "/home/juju/.juju/ssh",
     ensure => directory,
