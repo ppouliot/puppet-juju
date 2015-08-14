@@ -17,9 +17,13 @@ class juju::default_user {
     shell            => '/bin/bash',
   } ->
 
-  juju::generic_config{'juju':} ->
-  file{["/home/juju/.juju",
-         "/home/juju/.juju/ssh",]:
+  juju::generic_config{'juju':
+    require => User['juju'],
+  } ->
+  file{"/home/juju/.juju":
+    ensure => directory,
+  } ->
+  file{"/home/juju/.juju/ssh":]
     ensure => directory,
   } ->
   file{[ "/home/juju/.juju/ssh/juju_id_rsa",
