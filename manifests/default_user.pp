@@ -10,6 +10,7 @@ class juju::default_user {
     comment          => 'juju',
     gid              => 'juju',
     home             => '/home/juju',
+    managehome       => true,
     password         => $juju::juju_password,
     password_max_age => '99999',
     password_min_age => '0',
