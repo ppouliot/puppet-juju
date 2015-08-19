@@ -23,7 +23,7 @@ class juju::default_user {
   file{"/home/juju/.juju":
     ensure => directory,
   } ->
-  file{"/home/juju/.juju/ssh":]
+  file{"/home/juju/.juju/ssh":
     ensure => directory,
   } ->
   file{[ "/home/juju/.juju/ssh/juju_id_rsa",
