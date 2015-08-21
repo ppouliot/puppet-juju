@@ -15,35 +15,33 @@ class juju::default_user (
     home             => '/home/juju',
     managehome       => true,
     password         => $juju::juju_password,
-    password_max_age => '99999',
-    password_min_age => '0',
     shell            => '/bin/bash',
-  } ->
+  } 
 
-  juju::generic_config{'juju':
-    require => User['juju'],
-  } ->
-  file{"/home/juju/.juju":
-    ensure  => directory,
-    require => User['juju'],
-  } ->
-  file{"/home/juju/.juju/ssh":
-    ensure  => directory,
-    require => User['juju'],
-  } ->
-  file{[ "/home/juju/.juju/ssh/juju_id_rsa",
-         "/home/juju/.juju/ssh/juju_id_rsa.pub"]:
-    ensure  => file,
-    require => User['juju'],
-  }
+#  juju::generic_config{'juju':
+#    require => User['juju'],
+#  } ->
+#  file{"/home/juju/.juju":
+#    ensure  => directory,
+#    require => User['juju'],
+#  } ->
+#  file{"/home/juju/.juju/ssh":
+#    ensure  => directory,
+#    require => User['juju'],
+#  } ->
+#  file{[ "/home/juju/.juju/ssh/juju_id_rsa",
+#         "/home/juju/.juju/ssh/juju_id_rsa.pub"]:
+#    ensure  => file,
+#    require => User['juju'],
+#  }
 
 
-  concat { "/home/juju/.juju/environment.yaml":
-    mode    => 0644,
-  }
-  concat::fragment {"juju.environtment.yaml_header":
-    target  => "/home/juju/.juju/environment.yaml",
-    content => template("juju/environments.header.erb"),
-    order   => 01,
-  }
+#  concat { "/home/juju/.juju/environment.yaml":
+#    mode    => 0644,
+#  }
+#  concat::fragment {"juju.environtment.yaml_header":
+#    target  => "/home/juju/.juju/environment.yaml",
+#    content => template("juju/environments.header.erb"),
+#    order   => 01,
+#  }
 }
