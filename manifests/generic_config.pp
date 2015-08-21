@@ -1,19 +1,25 @@
 # == Define: juju::generic_config
 #
-define juju::generic_config (){
-  case $name {
-    'root':{ $basedir = "/${name}/" }
-    default:{ $basedir = "/home/${name}/" }
+define juju::generic_config (
+  $juju_user = $name,
+){
+  case $juju_user {
+    'root':{
+      $juju_home = "/root/"
+    }
+    default:{
+      $juju_home = "/home/${name}/"
+    }
   }
   exec {"juju_generate_generic_config-$name":
     command => '/usr/bin/juju generate-config',
     user    => $name,
-    cwd     => $basedir,
-    creates => ["${basedir}/.juju/",
-                "${basedir}/.juju/environments.yaml",
-                "${basedir}/.juju/ssh",
-                "${basedir}/.juju/ssh/juju_id_rsa",
-                "${basedir}/.juju/ssh/juju_id_rsa.pub"],
-    onlyif    => "/usr/bin/test ! -f ${basedir}/.juju",
+    cwd     => $juju_home,
+    creates => ["${juju_home}/.juju/",
+                "${juju_home}/.juju/environments.yaml",
+                "${juju_home}/.juju/ssh",
+                "${juju_home}/.juju/ssh/juju_id_rsa",
+                "${juju_home}/.juju/ssh/juju_id_rsa.pub"],
+    onlyif    => "/usr/bin/test ! -f ${juju_home}/.juju",
   }
 }
