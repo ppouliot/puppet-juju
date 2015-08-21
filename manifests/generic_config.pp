@@ -5,7 +5,7 @@ define juju::generic_config (){
     'root':{ $basedir = "/${name}/" }
     default:{ $basedir = "/home/${name}/" }
   }
-  exec {'juju_generate_generic_config':
+  exec {"juju_generate_generic_config-$name":
     command => '/usr/bin/juju generate-config',
     user    => $name,
     cwd     => $basedir,

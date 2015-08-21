@@ -21,14 +21,17 @@ class juju::default_user {
     require => User['juju'],
   } ->
   file{"/home/juju/.juju":
-    ensure => directory,
+    ensure  => directory,
+    require => User['juju'],
   } ->
   file{"/home/juju/.juju/ssh":
-    ensure => directory,
+    ensure  => directory,
+    require => User['juju'],
   } ->
   file{[ "/home/juju/.juju/ssh/juju_id_rsa",
          "/home/juju/.juju/ssh/juju_id_rsa.pub"]:
-    ensure => file,
+    ensure  => file,
+    require => User['juju'],
   }
 
 
