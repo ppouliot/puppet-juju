@@ -1,6 +1,9 @@
 # == Define: juju::default_user
 #
-class juju::default_user {
+# Define to manage juju group users
+#
+class juju::default_user (
+) inherits params {
 
   group {'juju':
     ensure           => 'present',
