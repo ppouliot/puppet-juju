@@ -1,9 +1,7 @@
 # == Define: juju::generic_config
 #
-define juju::generic_config (
-  $juju_user = $name,
-){
-  case $juju_user {
+define juju::generic_config () {
+ case $name {
     'root':{
       $juju_home = "/root/"
     }
