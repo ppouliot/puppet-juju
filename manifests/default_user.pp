@@ -27,7 +27,7 @@ class juju::default_user (
                 "/home/juju/.juju/ssh/juju_id_rsa",
                 "/home/juju/.juju/ssh/juju_id_rsa.pub"],
     onlyif  => "/usr/bin/test ! -f /home/juju/.juju",
-    require => User{'juju'},
+    require => User['juju'],
   }
 
 
