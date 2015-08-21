@@ -69,10 +69,8 @@ class juju (
   }
 
   class{'juju::install':} -> 
-  class{'juju::default_user':} ->
   class{'juju::config':}
 
   contain 'juju::install'
-  contain 'juju::default_user'
   contain 'juju::config'
 }
