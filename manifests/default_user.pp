@@ -19,15 +19,17 @@ class juju::default_user (
   } -> 
 
   exec {'juju_default_user-generate_generic_config':
-    command => '/usr/bin/juju generate-config',
-    cwd     => '/home/juju',
-    creates => ["/home/juju/.juju/",
-                "/home/juju/.juju/environments.yaml",
-                "/home/juju/.juju/ssh",
-                "/home/juju/.juju/ssh/juju_id_rsa",
-                "/home/juju/.juju/ssh/juju_id_rsa.pub"],
-    onlyif  => "/usr/bin/test ! -f /home/juju/.juju",
-    require => User['juju'],
+    command   => '/usr/bin/juju generate-config',
+    cwd       => '/home/juju',
+    user      => 'juju',
+    creates   => ["/home/juju/.juju/",
+                  "/home/juju/.juju/environments.yaml",
+                  "/home/juju/.juju/ssh",
+                  "/home/juju/.juju/ssh/juju_id_rsa",
+                  "/home/juju/.juju/ssh/juju_id_rsa.pub"],
+    onlyif    => "/usr/bin/test ! -f /home/juju/.juju",
+    require   => User['juju'],
+    logoutput => true,
   }
 
 
