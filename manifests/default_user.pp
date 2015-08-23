@@ -49,12 +49,12 @@ class juju::default_user (
   }
 
 
-  concat { "/home/juju/.juju/environment.yaml":
+  concat { "/home/juju/.juju/environments.yaml":
     mode    => 0644,
     require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
   }
   concat::fragment {"juju.environtment.yaml_header":
-    target  => "/home/juju/.juju/environment.yaml",
+    target  => "/home/juju/.juju/environments.yaml",
     content => template("juju/environments.header.erb"),
     order   => 01,
     require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
