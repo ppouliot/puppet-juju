@@ -1,6 +1,11 @@
 # == Class: juju::environment
 #
-define juju::environment($juju_environment = $name){
+define juju::environment(
+  $juju_environment = $name,
+  #maas
+  $maas_server      = undef,
+  $maas_oath        = undef,
+){
   validate_re($juju_environment, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
   case $juju_environment {
     'amazon':{
