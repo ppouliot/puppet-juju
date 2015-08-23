@@ -119,7 +119,7 @@ define juju::environment($juju_path){
       $private_key                 = undef
       $client_email                = undef
       $client_id                   = undef
-      $project-id                  = undef
+      $project_id                  = undef
       $region                      = 'us-central1'
       $image_endpoint              = 'https://www.googleapis.com'
     }
