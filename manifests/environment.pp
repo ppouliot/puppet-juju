@@ -139,20 +139,20 @@ define juju::environment($juju_path){
       fail("${name} is not a valid juju environment!")
     } 
   }
-  if ! defined (Concat["${juju_path}/environment.yaml"]) {
-    concat { "${juju_path}/.juju/environment.yaml":
-      mode    => 0644,
-    }
-  }
-  if ! defined (Concat::Fragment["${$juju_path}.environtment.yaml_header"]) {
-    concat::fragment {"${$juju_path}.environtment.yaml_header":
-      target  => "${juju_path}/.juju/environment.yaml",
-      content => template("juju/environment.header.erb")
-      order   => 01,
-    }
-  }
-  concat::fragment {"${$juju_path}.juju.environtment.yaml.${name}":
-    target  => "${juju_path}/environment.yaml",
+#  if ! defined (Concat["/home/juju/.juju/environment.yaml"]) {
+#    concat { "/home/juju/.juju/.juju/environment.yaml":
+#      mode    => 0644,
+#    }
+#  }
+#  if ! defined (Concat::Fragment["environtment.yaml_header"]) {
+#    concat::fragment {"${name}.environtment.yaml_header":
+#      target  => "/home/juju/.juju/.juju/environment.yaml",
+#      content => template("juju/environment.header.erb")
+#      order   => 01,
+#    }
+#  }
+  concat::fragment {"${name}.juju.environtment.yaml":
+    target  => "/home/juju/.juju/environment.yaml",
     content => template("juju/environment.${name}.erb")
     order   => 02,
   }
