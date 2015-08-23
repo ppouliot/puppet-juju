@@ -153,7 +153,7 @@ define juju::environment($juju_path){
 #  }
   concat::fragment {"${name}.juju.environtment.yaml":
     target  => "/home/juju/.juju/environment.yaml",
-    content => template("juju/environment.${name}.erb")
+    content => template("juju/environment.${name}.erb"),
     order   => 02,
   }
 }
