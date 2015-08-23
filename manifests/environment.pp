@@ -86,7 +86,7 @@ define juju::environment(){
     }
     'maas':{
       valdiate_re($environment_type,'maas','maas is the only valid option for this environment type')
-      juju::environment::maas{$name}
+      juju::environment::maas{$name:}
     }
     'local':{
       $environment_type            = 'local'
