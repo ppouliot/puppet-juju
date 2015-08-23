@@ -1,6 +1,6 @@
 # == Class: juju::environment
 #
-define juju::environment($juju_path){
+define juju::environment(){
   validate_re($name, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
   case $name {
     'amazon':{
