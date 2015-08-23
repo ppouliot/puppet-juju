@@ -85,12 +85,8 @@ define juju::environment(){
       $enable_os_upgrade           = true
     }
     'maas':{
-      $environment_type            = 'maas'
-      $maas_server                 = undef
-      $maas_oauth                  = undef 
-      $bootstrap_timeout           = '1800'
-      $enable_os_refresh_update    = true
-      $enable_os_upgrade           = true
+      valdiate_re($environment_type,'maas','maas is the only valid option for this environment type')
+      juju::environment::maas{$name}
     }
     'local':{
       $environment_type            = 'local'
