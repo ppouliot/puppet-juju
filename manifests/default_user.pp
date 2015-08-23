@@ -20,7 +20,7 @@ class juju::default_user (
 
   exec {'juju_default_user-generate_generic_config':
     command     => '/usr/bin/juju generate-config',
-    environment => ['JUJU_HOME=/home/juju'],
+    environment => ['JUJU_HOME=/home/juju/.juju'],
     cwd         => '/home/juju',
     user        => 'juju',
     creates     => ["/home/juju/.juju/",
