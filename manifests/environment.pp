@@ -1,8 +1,9 @@
 # == Class: juju::environment
 #
-define juju::environment(){
+define juju::environment(
+){
   validate_re($name, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
-  case $environment_type {
+  case $name {
     'amazon':{
       $environment_type     = 'ec2'
       $region               = 'us-east-1'
@@ -85,8 +86,12 @@ define juju::environment(){
       $enable_os_upgrade           = true
     }
     'maas':{
-      valdiate_re($environment_type,'maas','maas is the only valid option for this environment type')
-      juju::environment::maas{$name:}
+       $environment_type            = 'maas'
+       $maas_server                 = undef
+       $maas_oauth                  = undef 
+       $bootstrap_timeout           = '1800'
+       $enable_os_refresh_update    = true
+       $enable_os_upgrade           = true
     }
     'local':{
       $environment_type            = 'local'
