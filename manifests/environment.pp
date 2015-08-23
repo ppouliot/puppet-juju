@@ -109,7 +109,7 @@ define juju::environment($juju_path){
       $manta_user                  = undef
       $manta_url                   = 'https://us-east.manta.joyent.com'
       $private_key_path            = undef
-      $algorithm                   = rsa-sha256
+      $algorithm                   = 'rsa-sha256'
       $enable_os_refresh_update    = true
       $enable_os_upgrade           = true
     }
