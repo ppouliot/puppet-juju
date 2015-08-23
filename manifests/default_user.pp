@@ -6,30 +6,31 @@ class juju::default_user (
 ) inherits params {
 
   group {'juju':
-    ensure           => 'present',
+    ensure      => 'present',
   } ->
   user { 'juju':
-    ensure           => 'present',
-    comment          => 'juju',
-    gid              => 'juju',
-    home             => '/home/juju',
-    managehome       => true,
-    password         => $juju::juju_password,
-    shell            => '/bin/bash',
+    ensure      => 'present',
+    comment     => 'juju',
+    gid         => 'juju',
+    home        => '/home/juju',
+    managehome  => true,
+    password    => $juju::juju_password,
+    shell       => '/bin/bash',
   } -> 
 
   exec {'juju_default_user-generate_generic_config':
-    command   => '/usr/bin/juju generate-config',
-    cwd       => '/home/juju',
-    user      => 'juju',
-    creates   => ["/home/juju/.juju/",
-                  "/home/juju/.juju/environments.yaml",
-                  "/home/juju/.juju/ssh",
-                  "/home/juju/.juju/ssh/juju_id_rsa",
-                  "/home/juju/.juju/ssh/juju_id_rsa.pub"],
-    onlyif    => "/usr/bin/test ! -f /home/juju/.juju",
-    require   => User['juju'],
-    logoutput => true,
+    command     => '/usr/bin/juju generate-config',
+    environment => ['JUJU_HOME=/home/juju'],
+    cwd         => '/home/juju',
+    user        => 'juju',
+    creates     => ["/home/juju/.juju/",
+                    "/home/juju/.juju/environments.yaml",
+                    "/home/juju/.juju/ssh",
+                    "/home/juju/.juju/ssh/juju_id_rsa",
+                    "/home/juju/.juju/ssh/juju_id_rsa.pub"],
+    onlyif      => "/usr/bin/test ! -f /home/juju/.juju",
+    require     => User['juju'],
+    logoutput   => true,
   }
 
 
