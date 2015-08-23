@@ -1,9 +1,11 @@
 # == Class: juju::environment
 #
 define juju::environment(
+  juju_environment = $name
+  
 ){
-  validate_re($name, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
-  case $name {
+  validate_re($juju_environment, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
+  case $juju_environment {
     'amazon':{
       $environment_type     = 'ec2'
       $region               = 'us-east-1'
