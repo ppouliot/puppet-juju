@@ -135,25 +135,27 @@ define juju::environment(){
       $enable_os_refresh_update    = true
       $enable_os_upgrade           = true
     }
-    default:{
-      fail("${name} is not a valid juju environment!")
-    } 
+#    default:{
+#      fail("${name} is not a valid juju environment!")
+#    } 
   }
-#  if ! defined (Concat["/home/juju/.juju/environment.yaml"]) {
-#    concat { "/home/juju/.juju/.juju/environment.yaml":
-#      mode    => 0644,
-#    }
-#  }
-#  if ! defined (Concat::Fragment["environtment.yaml_header"]) {
-#    concat::fragment {"${name}.environtment.yaml_header":
-#      target  => "/home/juju/.juju/.juju/environment.yaml",
-#      content => template("juju/environment.header.erb")
-#      order   => 01,
-#    }
-#  }
-  concat::fragment {"${name}.juju.environtment.yaml":
-    target  => "/home/juju/.juju/environment.yaml",
-    content => template("juju/environments.${name}.erb"),
-    order   => 02,
+  if ! defined (Concat["/home/juju/.juju/environments.yaml"]) {
+    concat { "/home/juju/.juju/environments.yaml":
+      mode    => 0644,
+    }
+  }
+  if ! defined (Concat::Fragment["juju.environtment.yaml_header"]) {
+    concat::fragment {"juju.environtments.yaml_header":
+      target  => "/home/juju/.juju/environments.yaml",
+      content => template("juju/environments.header.erb"),
+      order   => 01,
+    }
+  }
+  if ! defined (Concat::Fragment["${name}.juju.environtment"]) {
+    concat::fragment {"${name}.juju.environtment":
+      target  => "/home/juju/.juju/environments.yaml",
+      content => template("juju/environments.${name}.erb"),
+      order   => 02,
+    }
   }
 }

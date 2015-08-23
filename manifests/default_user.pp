@@ -31,7 +31,7 @@ class juju::default_user (
     onlyif      => "/usr/bin/test ! -f /home/juju/.juju",
     require     => User['juju'],
     logoutput   => true,
-  }
+  } ->
 
 
   file{"/home/juju/.juju":
@@ -47,17 +47,16 @@ class juju::default_user (
     ensure  => file,
     require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
   }
-
-
-  concat { "/home/juju/.juju/environments.yaml":
-    mode    => 0644,
-    require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
-  }
-  concat::fragment {"juju.environtment.yaml_header":
-    target  => "/home/juju/.juju/environments.yaml",
-    content => template("juju/environments.header.erb"),
-    order   => 01,
-    require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
-  }
+# Moving to Environment.pp for testing
+# ->
+#  concat { "/home/juju/.juju/environments.yaml":
+#    mode    => 0644,
+#    require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
+#  }
+#  concat::fragment {"juju.environtment.yaml_header":
+#    target  => "/home/juju/.juju/environments.yaml",
+#    content => template("juju/environments.header.erb"),
+#    order   => 01,
+#  }
 
 }
