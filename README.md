@@ -43,10 +43,18 @@ If your most recent release breaks compatibility or requires particular steps
 for upgrading, you may wish to include an additional section here: Upgrading
 (For documentation on JUJU, see https://juju.ubuntu.com/docs).
 
-## Usage
+## Basic Usage
 
   ```
   class{'juju':}
+
+  ```
+## Usage: Include Juju-Jitsu Packages
+  
+  ```
+  class{'juju':
+    juju_jitsu => true,
+  }
   ```
 
 ## Reference

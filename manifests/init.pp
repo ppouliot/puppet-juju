@@ -38,7 +38,14 @@
 #
 # === Examples
 #
+#  Basic Usage
+#  -----------
+#  class{'juju':}
+#
+#  Installing Juju and Juju-Jitsu 
+#  ------------------------------
 #  class { 'juju':
+#    juju_jitsu => true,
 #  }
 #
 # === Authors
@@ -57,7 +64,7 @@ class juju (
   $juju_release               = $juju::params::juju_release,
   $juju_packages              = $juju::params::juju_packages,
   $juju_password              = $juju::params::juju_password,
-  $juju_jitsu                 = $juju::params::jitsu,
+  $juju_jitsu                 = $juju::params::juju_jitsu,
   $package_name               = $juju::params::package_name,
   $manage_package             = $juju::params::manage_package,
 
