@@ -42,7 +42,7 @@ class juju::install {
         package{'charm-tools':
           ensure => $juju::ensure,
         }
-        if $juju:juju_jitsu != false {
+        if $juju::juju_jitsu != false {
           package{'juju-jitsu':
             ensure => $juju::ensure,
           }
