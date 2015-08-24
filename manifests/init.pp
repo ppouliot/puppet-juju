@@ -33,6 +33,9 @@
 #   Password for the system user account named 'juju' which is the 
 #   account use this modules uses for charm bootstraping
 #
+# [*juju_jitsu*]
+#   If set to true, juju-jitsu package will we installed
+#
 # === Examples
 #
 #  class { 'juju':
@@ -54,6 +57,7 @@ class juju (
   $juju_release               = $juju::params::juju_release,
   $juju_packages              = $juju::params::juju_packages,
   $juju_password              = $juju::params::juju_password,
+  $juju_jitsu                 = $juju::params::jitsu,
   $package_name               = $juju::params::package_name,
   $manage_package             = $juju::params::manage_package,
 

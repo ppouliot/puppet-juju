@@ -6,6 +6,7 @@
 
 class juju::install {
   validate_string($juju::version)
+  validate_bool($juju::juju_jitsu)
   validate_re($::operatingsystem, '(^Ubuntu)$', 'This Module only works on Ubuntu based systems.')
   validate_re($::operatingsystemrelease, '(^12.04|14.04)$', 'This Module only works on Ubuntu releases 12.04 and 14.04.')
   notice("JUJU installation is occuring on node ${::fqdn}." )
@@ -40,6 +41,11 @@ class juju::install {
         } ->
         package{'charm-tools':
           ensure => $juju::ensure,
+        }
+        if $juju:juju_jitsu != false {
+          package{'juju-jitsu':
+            ensure => $juju::ensure,
+          }
         }
       }
     }
