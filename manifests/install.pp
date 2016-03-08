@@ -47,7 +47,6 @@ class juju::install {
             ensure => $juju::ensure,
           }
         }
-      }
     }
 
     default:{
