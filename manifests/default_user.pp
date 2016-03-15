@@ -9,14 +9,14 @@ class juju::default_user (
     ensure      => 'present',
   } ->
   user { 'juju':
-    ensure      => 'present',
-    comment     => 'juju',
-    gid         => 'juju',
-    home        => '/home/juju',
-    managehome  => true,
-    password    => $juju::juju_password,
-    shell       => '/bin/bash',
-  } -> 
+    ensure     => 'present',
+    comment    => 'juju',
+    gid        => 'juju',
+    home       => '/home/juju',
+    managehome => true,
+    password   => $juju::juju_password,
+    shell      => '/bin/bash',
+  } ->
 
   exec {'juju_default_user-generate_generic_config':
     command     => '/usr/bin/juju generate-config',
@@ -40,12 +40,13 @@ class juju::default_user (
   } ->
   file{'/home/juju/.juju/ssh':
     ensure  => directory,
-    require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
+    require => [ User['juju'], Exec['juju_default_user-generate_generic_config']],
   } ->
-  file{[ '/home/juju/.juju/ssh/juju_id_rsa',
-         '/home/juju/.juju/ssh/juju_id_rsa.pub']:
+  file{[
+    '/home/juju/.juju/ssh/juju_id_rsa',
+    '/home/juju/.juju/ssh/juju_id_rsa.pub']:
     ensure  => file,
-    require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
+    require => [ User['juju'], Exec['juju_default_user-generate_generic_config']],
   }
 # Moving to Environment.pp for testing
 # ->

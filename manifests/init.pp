@@ -79,9 +79,9 @@ class juju (
     validate_string($juju_release, '^(stable)$', 'This module only supports the Stable Releases')
   }
 
-  class{'juju::install':} -> 
-  class{'juju::default_user':} ->
-  class{'juju::config':}
+  class{'::juju::install':} ->
+  class{'::juju::default_user':} ->
+  class{'::juju::config':}
 
   contain 'juju::install'
   contain 'juju::default_user'

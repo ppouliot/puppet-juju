@@ -14,7 +14,7 @@ class juju::install {
   case $operatingsystem {
     'Ubuntu':{
       if ($juju::juju_release) {
-        include apt
+        include ::apt
         notice("Node ${::fqdn} is using the juju ${juju::juju_release} package repository for JUJU installation." )
         apt::ppa{"ppa:juju/${juju::juju_release}":}
         if ($juju::manage_package) {
@@ -37,7 +37,7 @@ class juju::install {
       if $juju::manage_package {
         package { 'juju':
           ensure => $juju::ensure,
-          name   => $jujupackage
+          name   => $jujupackage,
         } ->
         package{'charm-tools':
           ensure => $juju::ensure,
