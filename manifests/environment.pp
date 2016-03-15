@@ -47,6 +47,9 @@ define juju::environment(
           $access_key = undef
           $secret_key = undef
         }
+        default:{
+          warning("${::authmode} must be set for proper use of OpenStack providers")
+        }
       }
     }
     'hpcloud':{
@@ -77,6 +80,9 @@ define juju::environment(
           validate_re($secret_key, '($secret_key)$', 'Auth-mode keypair requires valid a value for secret_key!')
           $access_key = undef
           $secret_key = undef
+        }
+        default:{
+          warning("${::authmode} must be set for proper use of HPCLOUD providers")
         }
       }
     }
@@ -140,9 +146,9 @@ define juju::environment(
       $enable_os_refresh_update    = true
       $enable_os_upgrade           = true
     }
-#    default:{
-#      fail("${name} is not a valid juju environment!")
-#    } 
+    default:{
+      fail("${name} is not a valid juju environment!")
+    }
   }
   if ! defined (Concat['/home/juju/.juju/environments.yaml']) {
     concat { '/home/juju/.juju/environments.yaml':

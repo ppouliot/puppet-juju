@@ -2,11 +2,9 @@
 #
 # Define to manage juju group users
 #
-class juju::default_user (
-) inherits params {
-
+class juju::default_user() inherits params {
   group {'juju':
-    ensure      => 'present',
+    ensure => 'present',
   } ->
   user { 'juju':
     ensure     => 'present',
@@ -34,19 +32,19 @@ class juju::default_user (
   } ->
 
 
-  file{'/home/juju/.juju':
+  file {'/home/juju/.juju':
     ensure  => directory,
-    require => [User['juju'], Exec['juju_default_user-generate_generic_config']],
+    require => [ User['juju'], Exec['juju_default_user-generate_generic_config'] ],
   } ->
-  file{'/home/juju/.juju/ssh':
+  file {'/home/juju/.juju/ssh':
     ensure  => directory,
-    require => [ User['juju'], Exec['juju_default_user-generate_generic_config']],
+    require => [ User['juju'], Exec['juju_default_user-generate_generic_config'] ],
   } ->
-  file{[
+  file {[
     '/home/juju/.juju/ssh/juju_id_rsa',
     '/home/juju/.juju/ssh/juju_id_rsa.pub']:
     ensure  => file,
-    require => [ User['juju'], Exec['juju_default_user-generate_generic_config']],
+    require => [ User['juju'], Exec['juju_default_user-generate_generic_config'] ],
   }
 # Moving to Environment.pp for testing
 # ->
