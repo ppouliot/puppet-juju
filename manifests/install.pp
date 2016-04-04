@@ -47,8 +47,8 @@ class juju::install {
             ensure => $juju::ensure,
           }
         }
+      }
     }
-
     default:{
       fail("JUJU does not support installation on your operation system: ${::osfamily} ")
     }
