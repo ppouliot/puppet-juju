@@ -12,7 +12,7 @@ class juju::params {
   case $::operatingsystem {
     'Ubuntu':{
       case $::operatingsystemrelease {
-        '14.04':{
+        '14.04','16.04','18.04':{
           $version              = undef
           $ensure               = present
           $prerequired_packages = undef
