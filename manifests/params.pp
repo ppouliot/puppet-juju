@@ -20,6 +20,7 @@ class juju::params {
           $juju_password        = 'juju'
           $juju_release         = 'stable'
           $juju_jitsu           = false
+          $juju_gui             = undef
           $package_name         = 'juju'
           $default_provider     = 'amazon'
         }

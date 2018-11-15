@@ -36,6 +36,10 @@
 # [*juju_jitsu*]
 #   If set to true, juju-jitsu package will we installed
 #
+# [*juju_gui*]
+#   If set to true, juju-gui package will we installed
+#
+#
 # === Examples
 #
 #  Basic Usage
@@ -65,6 +69,7 @@ class juju (
   $juju_packages              = $juju::params::juju_packages,
   $juju_password              = $juju::params::juju_password,
   $juju_jitsu                 = $juju::params::juju_jitsu,
+  $juju_gui                   = $juju::params::juju_gui,
   $package_name               = $juju::params::package_name,
   $manage_package             = $juju::params::manage_package,
 
@@ -82,6 +87,9 @@ class juju (
   class{'::juju::install':}
 ->class{'::juju::default_user':}
 ->class{'::juju::config':}
+->if ($juju_gui) {
+    class{'juju::juju_gui'}
+  }
 
   contain 'juju::install'
   contain 'juju::default_user'
