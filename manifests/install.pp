@@ -5,13 +5,13 @@
 # This installs on Ubunt based distributions only.
 
 class juju::install {
-  validate_string($juju::version)
-  validate_bool($juju::juju_jitsu)
+  validate_string($::juju::version)
+  validate_bool($::juju::juju_jitsu)
   validate_re($::operatingsystem, '(^Ubuntu)$', 'This Module only works on Ubuntu based systems.')
-  validate_re($::operatingsystemrelease, '(^12.04|14.04)$', 'This Module only works on Ubuntu releases 12.04 and 14.04.')
+  validate_re($::operatingsystemrelease, '(^12.04|14.04|16.04|18.04)$', 'This Module only works on Ubuntu LTS releases 12.04, 14.04, 16.04, 18.04.') #lint:ignore:140chars
   notice("JUJU installation is occuring on node ${::fqdn}." )
 
-  case $operatingsystem {
+  case $::operatingsystem {
     'Ubuntu':{
       if ($juju::juju_release) {
         include ::apt
@@ -38,8 +38,8 @@ class juju::install {
         package { 'juju':
           ensure => $juju::ensure,
           name   => $jujupackage,
-        } ->
-        package{'charm-tools':
+        }
+      ->package{'charm-tools':
           ensure => $juju::ensure,
         }
         if $juju::juju_jitsu != false {

@@ -6,7 +6,7 @@ define juju::environment(
   $maas_server      = undef,
   $maas_oath        = undef,
 ){
-  validate_re($juju_environment, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments')
+  validate_re($juju_environment, '(^amazon|openstack|hpcloud|manual|maas|local|joyent|gce|azure)$', 'This Module only works with the following Juju environments') #lint:ignore:140chars
   case $juju_environment {
     'amazon':{
       $environment_type     = 'ec2'
@@ -33,7 +33,7 @@ define juju::environment(
       $auth_mode            = undef
       $enable_os_refresh_update    = true
       $enable_os_upgrade           = true
-      validate_re($name, '(^userpass|keypair)$', 'Your $auth_mode is not valid for Openstack environments require userpass or keypair as valid values!')
+      validate_re($name, '(^userpass|keypair)$', 'Your $auth_mode is not valid for Openstack environments require userpass or keypair as valid values!') #lint:ignore:140chars
       case $auth_mode {
         'userpass':{
           validate_re($::user_name, '($username)$', 'Auth-mode userpass requires a valid value for user_name!')
@@ -67,7 +67,7 @@ define juju::environment(
       $auth_mode            = undef
       $enable_os_refresh_update    = true
       $enable_os_upgrade           = true
-      validate_re($name, '(^userpass|keypair)$', 'Your $auth_mode is not valid for Openstack environments require userpass or keypair as valid values!')
+      validate_re($name, '(^userpass|keypair)$', 'Your $auth_mode is not valid for Openstack environments require userpass or keypair as valid values!') #lint:ignore:140chars
       case $auth_mode {
         'userpass':{
           validate_re($::user_name, '($username)$', 'Auth-mode userpass requires a valid value for user_name!')
