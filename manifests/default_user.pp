@@ -17,7 +17,7 @@ class juju::default_user(){
   }
 ->exec {'juju_default_user-generate_generic_config':
 #   command     => '/usr/bin/juju generate-config',
-    command     => '/usr/bin/juju show-model default',
+    command     => '/usr/bin/juju autoload-credentials',
     environment => ['JUJU_HOME=/home/juju/.juju'],
     cwd         => '/home/juju',
     user        => 'juju',
