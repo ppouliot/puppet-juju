@@ -12,5 +12,5 @@ RUN \
     && r10k puppetfile install --verbose DEBUG2 \
     && puppet module list \
     && puppet module list --tree 
-RUN puppet apply --debug --trace --verbose --modulepath=/etc/puppetlabs/code/environments/production/modules /etc/puppetlabs/code/modules/juju/tests/init.pp
+RUN puppet apply --debug --trace --verbose --modulepath=/etc/puppetlabs/code/modules:/etc/puppetlabs/code/environments/production/modules /etc/puppetlabs/code/modules/juju/tests/init.pp
 EXPOSE 80
