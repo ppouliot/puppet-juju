@@ -6,8 +6,7 @@ class juju::default_user(){
   group {'juju':
     ensure => 'present',
   }
-  include juju::params
-->user { 'juju':
+->user{'juju':
     ensure     => 'present',
     comment    => 'juju',
     gid        => 'juju',
