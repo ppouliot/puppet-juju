@@ -1,0 +1,8 @@
+version: '3'
+services:
+ juju:
+    image: "${USERNAME}/${IMAGE}:${VERSION}"
+    container_name: juju
+    build:
+      context: .
+      dockerfile: Dockerfile
