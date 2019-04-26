@@ -31,17 +31,37 @@ This Puppet module deploys the JUJU packages and provides puppetized
 
 ## Setup
 
+
+To quickly install maas using this puppet module run the following command which will bootstrap your puppet installation then install the module and it's necessary components before finally installing and configurating MaaS.
+
+```
+wget https://raw.githubusercontent.com/ppouliot/puppet-juju/master/files/bootstrap_puppet_to_juju.sh -O - | sh
+```
+
+Additionally to quickly see the module in action assuming you already have vagrant installed.
+
+```
+git clone https://github.com/ppouliot/puppet-juju
+cd puppet-juju && vagrant up
+```
+
 ### What juju affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* Packages
+  * juju
+* Users
+  * juju
+* Services
+  * tbd
+* FIles
+  * tbd
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements 
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+* Ubuntu 14.04
+* Ubuntu 16.04
+* Ubuntu 18.04
+
 
 ### Beginning with juju
 
@@ -75,13 +95,11 @@ for upgrading, you may wish to include an additional section here: Upgrading
 
 ## Limitations
 
-* Ubuntu 14.04
-* Ubuntu 16.04
-* Ubuntu 18.04
+* Ubuntu platforms only, specifcally 14.04, 16.04 and 18.04.
 
 ## Development
 
-Clone the repo, make changes, then submit a pull request.
+Feel free to open pull requests or issues at [https://github.com/ppouliot/puppet-juju](https://github.com/ppouliot/puppet-juju)
 
 ## Contributors
 * Peter Pouliot <peter@pouliot.net>
