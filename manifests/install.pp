@@ -31,13 +31,21 @@ class juju::install {
           ensure => $juju::ensure,
           name   => $jujupackage,
         }
-# Removing Charm tools to potentially put them in thier own class and install via snap
-#      ->package{'charm-tools':
-#          ensure => $juju::ensure,
-#        }
-        if $juju::juju_jitsu != false {
-          package{'juju-jitsu':
-            ensure => $juju::ensure,
+        case $::operatingsystemrelease {
+          '14.04':{
+            notice("Installing charm-tools form charm authoring on your ${::operatingsystemrelease}")
+            package{'charm-tools':
+              ensure => $juju::ensure,
+              require => Package['juju'],
+            }
+            if $juju::juju_jitsu != false {
+              package{'juju-jitsu':
+                ensure => $juju::ensure,
+              }
+            }
+          }
+          default:{
+            warning("There is no charm-tools deb provided for Ubuntu ${::operatingsystemrelease}")
           }
         }
       }

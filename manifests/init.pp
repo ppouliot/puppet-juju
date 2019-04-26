@@ -105,11 +105,7 @@ class juju (
   class{'::juju::install':}
 ->class{'::juju::default_user':}
 ->class{'::juju::config':}
-  if ($juju_gui) {
-    class{'juju::juju_gui':
-      require => Class['::juju::config'],
-    }
-  }
+
   contain 'juju::install'
   contain 'juju::default_user'
   contain 'juju::config'
