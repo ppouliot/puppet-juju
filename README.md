@@ -5,7 +5,7 @@ A puppet module for deploying and managing [Juju](https://jujucharms.com)
 (This is unaffiliated with [Juju](https://jujucharms.com) or [Canonical](http://canonical.com) )
 
 
-!(https://jujucharms.com)[https://assets.ubuntu.com/v1/31c507a5-logo-juju-icon.svg]
+![Juju](https://assets.ubuntu.com/v1/31c507a5-logo-juju-icon.svg)
 
 
 #### Table of Contents
