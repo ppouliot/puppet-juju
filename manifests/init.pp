@@ -61,36 +61,55 @@
 # Copyright 2015 Peter J. Pouliot <peter@pouliot.net>, unless otherwise noted.
 #
 class juju (
-
-  $version                    = $juju::params::version,
-  $ensure                     = $juju::params::ensure,
-  $prerequired_packages       = $juju::params::prerequired_packages,
-  $juju_release               = $juju::params::juju_release,
-  $juju_packages              = $juju::params::juju_packages,
-  $juju_password              = $juju::params::juju_password,
-  $juju_jitsu                 = $juju::params::juju_jitsu,
-  $juju_gui                   = $juju::params::juju_gui,
-  $package_name               = $juju::params::package_name,
-  $manage_package             = $juju::params::manage_package,
-
-) inherits juju::params {
-
-  validate_string($version)
-  validate_re($::operatingsystem, '(^Ubuntu)$', 'This Module only works on Ubuntu based systems.')
-  validate_re($::operatingsystemrelease, '(^12.04|14.04|16.04|18.04)$', 'This Module only works on Ubuntu LTS releases 12.04, 14.04, 16.04, 18.04.') #lint:ignore:140chars
-  notice("Juju on node ${::fqdn} is managed by the juju puppet module." )
-
-  if ($juju_release) {
-    validate_string($juju_release, '^(stable)$', 'This module only supports the Stable Releases')
+  Optional[String] $version = undef,
+  String $ensure            = present,
+  String $juju_release_ppa  = 'stable',
+  String $package_name      = 'juju',
+  String $juju_password     = 'juju',
+  Boolean $juju_jitsu       = false,
+  Boolean $manage_package   = true,
+  String $default_provider  = 'maas',
+){
+  if $::operatingsystem {
+    assert_type(Pattern[/(^Ubuntu)$/], $::operatingsystem) |$a, $b| {
+      fail('This Module only works on Ubuntu based systems.')
+    }
   }
+  if $::operatingsystemrelease {
+    assert_type(Pattern[/(^12.04|14.04|16.04|18.04)$/], $::operatingsystemrelease) |$a, $b| {
+      fail('This Module only works on Ubuntu releases 14.04, 16.04 and 18.04.')
+    }
+  }
+  if ($juju::juju_release_ppa) {
+    assert_type(Pattern[/(^stable|devel)$/], $juju_release_ppa) |$a, $b| {
+      fail('This Module supports the Juju "stable" and "devel" releases.')
+    }
+  }
+  case $::operatingsystem {
+    'Ubuntu':{
+      case $::operatingsystemrelease {
+        '14.04','16.04','18.04':{
+          notice("Installing Juju on your ${::operatingsystemrelease}")
+        }
+        default:{
+          warning("This is currently untested on your ${::operatingsystemrelease}")
+        }
+      }
+    }
+    default:{
+      fail("This is not meant for this ${::operatingsystem}")
+    }
+  }
+  notice("Juju on node ${::fqdn} is managed by the juju puppet module." )
 
   class{'::juju::install':}
 ->class{'::juju::default_user':}
 ->class{'::juju::config':}
-->if ($juju_gui) {
-    class{'juju::juju_gui'}
+  if ($juju_gui) {
+    class{'juju::juju_gui':
+      require => Class['::juju::config'],
+    }
   }
-
   contain 'juju::install'
   contain 'juju::default_user'
   contain 'juju::config'
