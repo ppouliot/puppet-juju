@@ -1,4 +1,4 @@
-# juju
+# puppet-juju
 
 A puppet module for deploying and managing [Juju](https://jujucharms.com)
 
