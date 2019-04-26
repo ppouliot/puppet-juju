@@ -35,7 +35,7 @@ class juju::install {
           '14.04':{
             notice("Installing charm-tools form charm authoring on your ${::operatingsystemrelease}")
             package{'charm-tools':
-              ensure => $juju::ensure,
+              ensure  => $juju::ensure,
               require => Package['juju'],
             }
             if $juju::juju_jitsu != false {
