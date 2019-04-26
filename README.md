@@ -1,5 +1,13 @@
 # juju
 
+A puppet module for deploying and managing [Juju](https://jujucharms.com)
+
+(This is unaffiliated with [Juju](https://jujucharms.com) or [Canonical](http://canonical.com) )
+
+
+!(https://jujucharms.com)[https://assets.ubuntu.com/v1/31c507a5-logo-juju-icon.svg]
+
+
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -58,6 +66,7 @@ for upgrading, you may wish to include an additional section here: Upgrading
   ```
 
 ## Reference
+
 ### Classes
 * `juju`: Main Class
 * `juju::params`: Sets the defaults for the juju module parameters
@@ -67,17 +76,12 @@ for upgrading, you may wish to include an additional section here: Upgrading
 ## Limitations
 
 * Ubuntu 14.04
+* Ubuntu 16.04
+* Ubuntu 18.04
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Changelog
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+Clone the repo, make changes, then submit a pull request.
 
 ## Contributors
 * Peter Pouliot <peter@pouliot.net>
