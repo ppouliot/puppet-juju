@@ -27,7 +27,8 @@ This Puppet module deploys the JUJU packages and provides puppetized
 Administration of the JUJU deployment
 
 ## Module Description
-This Puppet module deploys the JUJU packages and provides puppetized
+This Puppet module deploys the JUJU packages and provides puppetized 
+Administration of the JUJU deployment
 
 ## Setup
 
